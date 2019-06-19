@@ -1,0 +1,21 @@
+.search-bar-container{
+    display: flex;
+    background-color: white;
+    color: black;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 4px 0px;
+}
+
+.search-icon{
+    display: block;   
+}
+
+.search-input{
+    padding-left: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    border: 0px;
+}

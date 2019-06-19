@@ -1,0 +1,62 @@
+:root{
+    --primary-font: 'Roboto', sans-serif;
+    --background-color: black;
+    --font-color: white;
+    --nasa-blue: #0B3D91;
+    --nasa-orange: #FC3D21;
+}
+
+body {
+    font-family: var(--primary-font);
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--nasa-blue);
+    color: var(--font-color);
+}
+
+h1{
+    margin: 0px;
+    padding: 0px;
+    font-size: 26px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.app {
+    width: 100%;
+    margin: auto;
+    background-color: var(--background-color);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .navbar-brand-name{
+        display: inline;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .navbar{
+        padding: 0px 50px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .navbar{
+        padding: 0px 50px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .app{
+        width: 1150px;
+    }
+}

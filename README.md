@@ -1,1 +1,2 @@
-# A simple started project for creating react/express apps
+# A wrapper for images.nasa.gov API 
+
