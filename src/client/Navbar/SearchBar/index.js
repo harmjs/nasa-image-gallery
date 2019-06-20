@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from 'react-feather/dist/icons/search';
-import "./styles.scss";
+import "./style.scss";
+import { search } from '../../api';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class SearchBar extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    search(this.state.value);
   }
   
   render() {

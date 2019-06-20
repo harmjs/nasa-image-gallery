@@ -1,0 +1,39 @@
+.navbar {
+    display: flex;
+    padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.navbar-brand-logo{
+    flex: 0 0 60px;
+}
+
+.navbar-brand-name{
+    display: none;
+    flex: 0 0 auto;
+    margin-right: auto;
+}
+
+.navbar-search{
+    flex: 0 0 300px;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 620px) {
+    .navbar-brand-name{
+        display: inline;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .navbar{
+        padding: 5px 50px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}

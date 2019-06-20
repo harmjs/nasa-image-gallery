@@ -1,4 +1,7 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const DotenvWebpackPlugin = require('dotenv-webpack');
+
 
 module.exports = {
   common: {
@@ -8,6 +11,7 @@ module.exports = {
       filename: 'app.js'
     },
     target: 'node',
+    externals: [nodeExternals()],
     node: {
       __dirname:  false,
       __filename: false
@@ -20,12 +24,16 @@ module.exports = {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: ['@babel/preset-env'],
+              plugins: ["@babel/plugin-transform-runtime"]
             }
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new DotenvWebpackPlugin()
+    ]
   },
   development: {
     mode: 'development',

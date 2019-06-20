@@ -1,7 +1,7 @@
 import React from 'react';
 import NasaLogo from './NasaLogo';
 import SearchBar from './SearchBar/index';
-import './styles.scss';
+import './style.scss';
 
 const NavBar = (props) => (
   <div className="navbar">

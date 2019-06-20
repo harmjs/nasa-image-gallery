@@ -1,6 +1,6 @@
 import './style.scss';
-import NavBar from './NavBar/index.js';
 
+import NavBar from './NavBar/index.js';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
