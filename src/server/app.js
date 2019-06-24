@@ -18,18 +18,20 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/search', async function(req, res) {
-  const { q } = req.query;
+  const { query, page } = req.query;
   try {
     const response = await axios.get('/search', {
       baseURL: NASA_API_BASE,
       params: { 
-        q: q,
+        q: query,
+        page: page
       }
     })
+     
     res.json(response.data);
   }
   catch(err) {
-    console.log(err);
+    
     res.send('error');
   }
 });

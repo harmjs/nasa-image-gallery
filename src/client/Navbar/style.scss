@@ -1,9 +1,21 @@
+h1{
+    margin: 0px;
+    padding: 0px;
+    font-size: 26px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .navbar {
+    margin: auto;
+    width: 100%;
+    max-width: var(--page-size-max);
+    padding: 4px var(--page-margin);
     display: flex;
-    padding: 5px;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    box-sizing: border-box;
 }
 
 .navbar-brand-logo{
@@ -11,7 +23,6 @@
 }
 
 .navbar-brand-name{
-    display: none;
     flex: 0 0 auto;
     margin-right: auto;
 }
@@ -20,20 +31,8 @@
     flex: 0 0 300px;
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 620px) {
-    .navbar-brand-name{
-        display: inline;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 600px) {
     .navbar{
-        padding: 5px 50px;
+        padding: 4px var(--page-margin-large);
     }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
 }

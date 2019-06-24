@@ -1,38 +1,39 @@
 :root{
     --primary-font: 'Roboto', sans-serif;
-    --background-color: black;
+    --navbar-color: black;
     --font-color: white;
-    --nasa-blue: #0B3D91;
+    --background-color: #0B3D91;
     --nasa-orange: #FC3D21;
+    --page-margin: 8px;
+    --page-margin-large: 40px;
+
+    --page-size-max: 1200px;
+    --page-size-large-: 600px;
 }
 
 body {
+    margin: 0px;
+    padding: 0px;
     font-family: var(--primary-font);
-    margin: 0px;
-    padding: 0px;
-    background-color: var(--nasa-blue);
     color: var(--font-color);
-}
-
-h1{
-    margin: 0px;
-    padding: 0px;
-    font-size: 26px;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.app {
-    width: 100%;
-    margin: auto;
     background-color: var(--background-color);
 }
 
+.navbar-container {
+    background-color: var(--navbar-color);
+}
 
+.main-content-container{
+    margin: auto;
+    width: 100%;
+    max-width: var(--page-size-max);
+    padding: 4px var(--page-margin);
+    box-sizing: border-box;
+}
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    .app{
-        width: 1150px;
+@media only screen and (min-width: 600px) {
+    .main-content-container{
+        padding: 4px var(--page-margin-large);
     }
 }
+
