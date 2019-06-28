@@ -7,7 +7,7 @@ const NavBar = (props) => {
   const { search, waiting } = props;
   return (
     <div className="container">
-      <div className="navbar">
+      <nav className="navbar">
         <div className="navbar-brand-logo">
           <NasaLogo />
         </div>
@@ -17,7 +17,7 @@ const NavBar = (props) => {
         <div className="navbar-search">
           <SearchBar waiting={ waiting} search={ search } />
         </div>
-      </div> 
+      </nav> 
     </div>
   )
 }

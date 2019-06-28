@@ -1,81 +1,136 @@
 import './style.scss';
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
 import NavBar from './NavBar/index.js';
 import Gallery from './Gallery/index.js';
 
-import { Content } from './models';
-import { getNASACollection } from './api';
+import { getNASACollection } from './testApi';
+const NASA_COLLECTION_SIZE = 100;
+const RESIZE_DELAY_MS = 25;
 
-import contentData from './contentData';
+const Result = function(item) {
+  const { description, media_type, nasa_id, title, keywords} = item.data[0];
+  const thumbnail = item.links[0].href;
+
+  return {
+    type: media_type,
+    nasaId: nasa_id,
+    title, keywords, description,
+    thumbnail
+  }
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      waiting: true,
-      error:  null,
-      content: null
+      navbarOffset: null,
+      errors: null,
+      loading: null,
+      query: null,
+      totalHits: null,
+      results: null
     };
+
+    this.resizeTimeoutId = null; 
+    this.resizeDelay = this.resizeDelay.bind(this);
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.resizeDelay);
+    this.loadSearchResults('moon');
+
+    const navbarContainer = document.getElementById('navbar-container');
+    const navbarOffset = navbarContainer.clientHeight;
+
     this.setState({
-      waiting: false,
-      content: new Content('moon', contentData.collection)
+      navbarOffset: navbarOffset
     })
   }
 
-  async loadNASAContent(setContent, query, page) {
-    if(this.state.waiting) return;
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeDelay);
+  }
 
-    try {
-      const { collection } = await getNASACollection(query, page);
+  resizeDelay() {
+    clearInterval(this.resizeTimeoutId);
+    this.resizeTimeoutId = setTimeout(() => {
+      const navbarContainer = document.getElementById('navbar-container');
+      const navbarOffset = navbarContainer.clientHeight;
+      if(this.state.navbarOffset !== navbarOffset) {
+        this.setState({ navbarOffset });
+      }
+    }, RESIZE_DELAY_MS)
+  }
+
+  async loadSearchResults(query) {
+    this.setState({
+      loading: true,
+      query: query,
+      totalHits: null,
+      results: null,
+    })
+
+    try{
+      const { collection } = await getNASACollection(query, 0);
+      const results = collection.items.map((item) => new Result(item));
 
       this.setState({
-        waiting: false,
-        content: setContent(collection)
+        loading: false,
+        totalHits: collection.metadata.total_hits,
+        results: results
       })
     }
-
-    catch(error) {
-      this.setState({
-        waiting: false,
-        error: error
-      });
+    catch(err) {
+      throw(err);
     }
+  }
 
-    this.setState({
-      waiting: true 
-    })
+  async loadMoreSearchResults() {
+    const { totalHits, loading, results, query } = this.state;
+    if(!loading && totalHits !== results.length) {
+      const nextPage = Math.floor(results.length / NASA_COLLECTION_SIZE);
+
+      this.setState({
+        loading: true
+      })
+
+      try {
+        const { collection } = await getNASACollection(query, nextPage);
+        const moreResults = collection.items.map((item) => new Result(item));
+
+        this.setState({
+          loading: false,
+          results: [...results.slice(), ...moreResults.slice()]
+        })
+      }
+      catch(error) {
+        this.setState({
+          loading: false
+        })
+      }
+    }
   }
 
   render() {
     return (
       <div className='app'>
-        <div className='navbar-container'>
+        <div id="navbar-container">
           <NavBar 
-            search = { (query, getContent) => this.loadNASAContent(
-              (collection) => new Content(query).add(collection),
-              query,
-              0
-            )}
+            search = {() => console.log('hit')}
           />
         </div>
-        <div className='main-content-container'>
-          { this.state.content && 
+        <div 
+          className='main-content-container' 
+          style={{ 
+            marginTop: this.state.navbarOffset + 'px',
+          }}
+        >
+          { this.state.results && 
             <Gallery 
-              content={ this.state.content }
-              loadMoreContent={
-                (page) => this.loadNASAContent(
-                  (collection) => this.state.content.add(collection),
-                  this.state.content.query,
-                  page
-                )
-              }
+              results={this.state.results}
+              loadMoreSearchResults={ () => this.loadMoreSearchResults()}
+              navbarOffset={this.state.navbarOffset}
             />
           }
         </div>

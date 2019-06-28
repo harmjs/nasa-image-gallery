@@ -1,4 +1,4 @@
-const TIMEOUT_MS = 2000;
+import testCollections from './testCollections';
 
 function process(apiPromise) {
   return new Promise(async function(resolve, reject) {
@@ -23,12 +23,15 @@ function process(apiPromise) {
   })
 }
 
-export const getNASACollection = function(query, page) { 
-  const apiPromise = axios.get('./search', {
-    params: { 
-      query, page
+export const getNASACollection = function(query, page) {
+  return process(new Promise((resolve, reject) => {
+    if(page > testCollections.length) {
+      reject('no more pages available');
+    }else {
+      resolve({
+        status: 200,
+        data: testCollections[page]
+      });
     }
-  })
-  return process(apiPromise);
+  }))
 }
-

@@ -8,11 +8,10 @@ h1{
 
 .navbar {
     margin: auto;
-    width: 100%;
     max-width: var(--page-size-max);
     padding: 4px var(--page-margin);
-    display: flex;
     flex-wrap: wrap;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;

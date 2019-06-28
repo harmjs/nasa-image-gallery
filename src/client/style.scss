@@ -19,12 +19,19 @@ body {
     background-color: var(--background-color);
 }
 
-.navbar-container {
+#navbar-container {
+    display: block;
     background-color: var(--navbar-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--nasa-orange);
 }
 
 .main-content-container{
-    margin: auto;
+    margin: 0px auto;
     width: 100%;
     max-width: var(--page-size-max);
     padding: 4px var(--page-margin);

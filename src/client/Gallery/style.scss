@@ -1,13 +1,13 @@
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
+    margin: 4px 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-gap: 8px;
 }
 
 .thumbnail {
     border: 1px solid white;
     position: relative;
-    flex: 1 0 220px;
-    margin: 5px;
     box-sizing: border-box;
     cursor: pointer;
     z-index: 0;
@@ -16,7 +16,7 @@
 .thumbnail::before{
     content: '';
     display: block;
-    padding-top:100%;
+    padding-top: 61.8%;
 }
 
 .thumbnail img {
@@ -46,7 +46,7 @@
     padding: 4px;
     margin: 2px;
     background-color: rgba(0, 0, 0, 0.75);
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .icon {
