@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 
-import VideoIcon from 'react-feather/dist/icons/video';
-import ImageIcon from 'react-feather/dist/icons/image';
-
-import Overlay from './Overlay/index';
-
 import './style.scss';
+import Thumbnail from './Thumbnail';
+import Overlay from './Overlay/index.js';
+import classNames from 'classnames';
 
 const SCROLL_DELAY_MS = 50;
 const SCROLL_PERCENTAGE_LOAD = 90;
@@ -25,7 +23,7 @@ class Gallery extends Component {
     super(props);
 
     this.state = {
-      overlayIndex: null
+      overlayIndex: 52
     }
 
     this.scrollTimeoutId = null;
@@ -51,68 +49,35 @@ class Gallery extends Component {
   }
 
   render() {
-    const overlayResult = this.props.results[this.state.overlayIndex]
+    const active = Number.isInteger(this.state.overlayIndex);
     return (
-      <div>
-        <div className="gallery">
-          {this.props.results.map((result, index) => (
-            <Thumbnail
-              key={index} 
-              image={result.thumbnail}
-              title={result.title}
-              type={result.type}
-              setOverlay={() => this.setState({ overlayIndex: index })}
-            /> 
-          ))}
+      <div id="gallery"
+        style={{
+          overflow: active ? "hidden" : "auto"
+        }}
+      >
+        <div className="main-content-container">
+          <div id="thumbnails">
+            {this.props.results.map((result, index) => (
+              <Thumbnail
+                key={index} 
+                image={result.thumbnail}
+                title={result.title}
+                type={result.type}
+                setOverlay={() => this.setState({ overlayIndex: index })}
+              /> 
+            ))}
+          </div>
         </div>
-        {
-          Number.isInteger(this.state.overlayIndex) && 
-            <Overlay 
-              back={() => this.setState({ overlayIndex: null })}
-              navbarOffset={this.props.navbarOffset } 
-              image={overlayResult.thumbnail}
-              title={overlayResult.title}
-              type={overlayResult.type}
-              description={overlayResult.description}
-            />
+        { active && 
+          <Overlay
+            navbarOffset={this.props.navbarOffset}
+            results={this.props.results}
+            overlayIndex={this.state.overlayIndex}
+            setOverlayIndex={(overlayIndex) => this.setState({ overlayIndex })}
+          />
         }
       </div>
-    )
-  }
-}
-
-class Thumbnail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hovered: false
-    }
-  }
-
-  render() {
-    const active = this.state.hovered;
-    return(
-      <div
-        onClick={() => this.props.setOverlay()}
-        className='thumbnail'
-        onMouseEnter={() => this.setState({ hovered: true })}
-        onMouseLeave={() => this.setState({ hovered: false })}
-      >
-        <img
-          src={this.props.image}
-        />
-        { active && 
-          <div
-            className="info"
-          >
-            <div className='title'>{this.props.title}</div>
-            {this.props.type === 'image' 
-              ? <ImageIcon className='icon'/> 
-              : <VideoIcon className='icon' />
-            }
-          </div>
-        }
-     </div>
     )
   }
 }

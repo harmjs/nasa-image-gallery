@@ -114,23 +114,27 @@ class App extends Component {
 
   render() {
     return (
-      <div className='app'>
+      <div className='app'
+        
+      >
         <div id="navbar-container">
           <NavBar 
             search = {() => console.log('hit')}
           />
         </div>
-        <div 
-          className='main-content-container' 
+        <div
           style={{ 
             marginTop: this.state.navbarOffset + 'px',
           }}
-        >
+        > 
+          <div>
+            
+          </div>
           { this.state.results && 
-            <Gallery 
+            <Gallery
+              navbarOffset={this.state.navbarOffset}
               results={this.state.results}
               loadMoreSearchResults={ () => this.loadMoreSearchResults()}
-              navbarOffset={this.state.navbarOffset}
             />
           }
         </div>

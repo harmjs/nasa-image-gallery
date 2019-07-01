@@ -17,7 +17,12 @@ body {
     font-family: var(--primary-font);
     color: var(--font-color);
     background-color: var(--background-color);
+    overflow: hidden;
 }
+
+#app {
+    overflow: auto;
+}  
 
 #navbar-container {
     display: block;
@@ -26,7 +31,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 50;
     border-bottom: 1px solid var(--nasa-orange);
 }
 
