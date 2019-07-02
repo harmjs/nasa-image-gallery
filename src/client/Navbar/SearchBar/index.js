@@ -12,6 +12,10 @@ export default class SearchBar extends Component {
       value: '',
       active: false
     }
+    this.inputRef = React.createRef();
+    this.clear = this.clear.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -22,28 +26,36 @@ export default class SearchBar extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.search(this.state.value);
+    this.clear();
+  }
+
+  clear(event) {
+    event.preventDefault();
+    this.inputRef.current.blur();
+    this.setState({ value: '' });
   }
   
   render() {
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={this.handleSubmit}>
         <label className={classNames({
           'search-bar-container': true,
           'search-bar-container-active': this.state.active
         })}>
           <SearchIcon className="search-icons"/>
-          <input 
+          <input
+            ref={this.inputRef}
             onFocus={() => this.setState({ active: true }) }
             onBlur={() => this.setState({ active: false }) }
             placeholder="Search" 
             className="search-input"
             value={this.state.value}
-            onChange={(e) => this.handleChange(e)}
+            onChange={this.handleChange}
           />
           {
             this.state.value.length > 0 &&
             <ClearIcon className="search-icons" 
-              onClick={() => this.setState({ value: ''})}
+              onClick={this.clear}
             />
           }
         </label>

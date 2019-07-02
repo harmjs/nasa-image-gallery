@@ -22,7 +22,7 @@ app.get('/search', async function(req, res) {
       params: { 
         q: query,
         page: page,
-        media_type: 'image, video'
+        media_type: 'video,image'
       }
     })
     res.json(response.data);
