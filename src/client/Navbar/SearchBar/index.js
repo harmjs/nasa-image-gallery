@@ -24,9 +24,8 @@ export default class SearchBar extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
     this.props.search(this.state.value);
-    this.clear();
+    this.clear(event);
   }
 
   clear(event) {
