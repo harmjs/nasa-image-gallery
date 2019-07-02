@@ -1,10 +1,11 @@
 const TIMEOUT_MS = 2000;
+import axios from 'axios';
 
 function process(apiPromise) {
   return new Promise(async function(resolve, reject) {
     const timeoutPromise = new Promise(function(resolve, reject) {
       setTimeout(() => {
-        reject('request timed out after ' + TIMEOUT_MS + ' ms');
+        reject('server request timed out after ' + TIMEOUT_MS + ' ms');
       }, TIMEOUT_MS)
     })
 
@@ -31,4 +32,3 @@ export const getNASACollection = function(query, page) {
   })
   return process(apiPromise);
 }
-

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './style.scss';
 import Thumbnail from './Thumbnail';
 import Overlay from './Overlay/index.js';
-import classNames from 'classnames';
 
 const SCROLL_DELAY_MS = 50;
 const SCROLL_PERCENTAGE_LOAD = 90;
@@ -23,7 +22,7 @@ class Gallery extends Component {
     super(props);
 
     this.state = {
-      overlayIndex: 52
+      overlayIndex: null
     }
 
     this.scrollTimeoutId = null;
@@ -57,6 +56,9 @@ class Gallery extends Component {
         }}
       >
         <div className="main-content-container">
+          <div id="messages">
+            {this.props.totalHits} results for '{this.props.query}'
+          </div>
           <div id="thumbnails">
             {this.props.results.map((result, index) => (
               <Thumbnail

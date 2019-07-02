@@ -30,12 +30,15 @@ module.exports = {
           }
         }
       ]
-    },
+    }
+  },
+  development: {
+    mode: 'development',
     plugins: [
       new DotenvWebpackPlugin()
     ]
   },
-  development: {
-    mode: 'development',
+  production: {
+    mode: 'production'
   }
 }

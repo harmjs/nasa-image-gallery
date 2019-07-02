@@ -4,19 +4,18 @@ import ReactDOM from 'react-dom';
 import NavBar from './NavBar/index.js';
 import Gallery from './Gallery/index.js';
 
-import { getNASACollection } from './testApi';
+import { getNASACollection } from './api';
 const NASA_COLLECTION_SIZE = 100;
 const RESIZE_DELAY_MS = 25;
 
-const Result = function(item) {
-  const { description, media_type, nasa_id, title, keywords} = item.data[0];
-  const thumbnail = item.links[0].href;
-
+const ResultModel = function(item) {
+  const { description, media_type, nasa_id, title, keywords } = item.data[0];
+  const thumbnail =item.links[0].href;
+  const href = item.href;
   return {
     type: media_type,
     nasaId: nasa_id,
-    title, keywords, description,
-    thumbnail
+    title, keywords, description, thumbnail, href
   }
 }
 
@@ -38,7 +37,6 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.resizeDelay);
-    this.loadSearchResults('moon');
 
     const navbarContainer = document.getElementById('navbar-container');
     const navbarOffset = navbarContainer.clientHeight;
@@ -72,8 +70,8 @@ class App extends Component {
     })
 
     try{
-      const { collection } = await getNASACollection(query, 0);
-      const results = collection.items.map((item) => new Result(item));
+      const { collection } = await getNASACollection(query, 1);
+      const results = collection.items.map((item) => new ResultModel(item));
 
       this.setState({
         loading: false,
@@ -97,7 +95,7 @@ class App extends Component {
 
       try {
         const { collection } = await getNASACollection(query, nextPage);
-        const moreResults = collection.items.map((item) => new Result(item));
+        const moreResults = collection.items.map((item) => new ResultModel(item));
 
         this.setState({
           loading: false,
@@ -114,12 +112,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className='app'
-        
-      >
+      <>
         <div id="navbar-container">
           <NavBar 
-            search = {() => console.log('hit')}
+            search = {(query) => this.loadSearchResults(query)}
           />
         </div>
         <div
@@ -127,18 +123,17 @@ class App extends Component {
             marginTop: this.state.navbarOffset + 'px',
           }}
         > 
-          <div>
-            
-          </div>
           { this.state.results && 
             <Gallery
+              query={this.state.query}
+              totalHits={this.state.totalHits}
               navbarOffset={this.state.navbarOffset}
               results={this.state.results}
               loadMoreSearchResults={ () => this.loadMoreSearchResults()}
             />
           }
         </div>
-      </div>
+      </>
     );
   }
 }

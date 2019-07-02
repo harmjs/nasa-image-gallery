@@ -17,12 +17,7 @@ body {
     font-family: var(--primary-font);
     color: var(--font-color);
     background-color: var(--background-color);
-    overflow: hidden;
 }
-
-#app {
-    overflow: auto;
-}  
 
 #navbar-container {
     display: block;

@@ -1,5 +1,8 @@
 import testCollections from './testCollections';
 
+const TIMEOUT_MS = 2000;
+const DELAY_MS = 1000;
+
 function process(apiPromise) {
   return new Promise(async function(resolve, reject) {
     const timeoutPromise = new Promise(function(resolve, reject) {
@@ -28,10 +31,12 @@ export const getNASACollection = function(query, page) {
     if(page > testCollections.length) {
       reject('no more pages available');
     }else {
-      resolve({
-        status: 200,
-        data: testCollections[page]
-      });
+      setTimeout(() => {
+        resolve({
+          status: 200,
+          data: testCollections[page]
+        });
+      }, DELAY_MS);
     }
   }))
 }
