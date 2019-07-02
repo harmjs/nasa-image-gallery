@@ -1,9 +1,15 @@
 # Nasa Gallery
 
-A simple website which uses the images.nasa.gov Api, made to develop my HTML, SCSS and React skills.
+A simple website which uses the images.nasa.gov api, made to develop my html, scss and React skills.
 
-`npm run develop` to bundle for development using hot reloading
+## Development
 
-`npm run produce` to bundle for production
+`npm run build-dev` 
 
-`npm run serve` to start the server with hot reloading
+`npm run start-dev`
+
+## Production
+
+`npm run build`
+
+`npm run start`
