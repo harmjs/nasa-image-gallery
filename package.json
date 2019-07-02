@@ -6,7 +6,7 @@
   "scripts": {
     "serve": "nodemon dist/app",
     "develop": "webpack --watch",
-    "produce": "webpack --watch"
+    "produce": "webpack"
   },
   "keywords": [
     "boilerplate",
