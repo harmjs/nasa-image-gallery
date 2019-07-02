@@ -1,7 +1,7 @@
 import './style.scss';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import NavBar from './NavBar/index.js';
+import Navbar from './Navbar/index.js';
 import Gallery from './Gallery/index.js';
 
 import { getNASACollection } from './api';
@@ -114,7 +114,7 @@ class App extends Component {
     return (
       <>
         <div id="navbar-container">
-          <NavBar 
+          <Navbar 
             search = {(query) => this.loadSearchResults(query)}
           />
         </div>
