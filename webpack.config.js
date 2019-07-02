@@ -4,14 +4,14 @@ const server = require('./webpack_server_configs.js');
 
 const TARGET = process.env.npm_lifecycle_event;
 
-if(TARGET === "develop"){
+if(TARGET === "build-dev"){
   module.exports = [
     merge(client.common, client.development),
     merge(server.common, server.development)
   ];
 }
 
-if(TARGET === "produce"){
+if(TARGET === "build"){
   module.exports = [
     merge(client.common, client.production),
     merge(server.common, client.production)

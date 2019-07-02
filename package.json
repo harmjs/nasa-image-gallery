@@ -4,9 +4,10 @@
   "description": "simple started project for creating react/express apps",
   "main": "dist/app",
   "scripts": {
-    "serve": "nodemon dist/app",
-    "develop": "webpack --watch",
-    "produce": "webpack"
+    "start": "node dist/app",
+    "start-dev": "nodemon dist/app",
+    "build": "webpack",
+    "build-dev": "webpack --watch"
   },
   "keywords": [
     "boilerplate",
@@ -26,8 +27,7 @@
     "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-feather": "^1.1.6",
-    "react-masonry-component": "^6.2.1"
+    "react-feather": "^1.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
